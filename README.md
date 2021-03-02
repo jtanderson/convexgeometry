@@ -2,8 +2,9 @@
 
 This package contains some primitive subroutines to
 
-1. Perform membership queries in convex bodies
-1. Generate random samples via random walks
+- Perform membership queries in convex bodies
+- Generate random samples via random walks
+- Estimate volume
 
 ## Usage/Demo
 
@@ -19,6 +20,10 @@ This package contains some primitive subroutines to
   - [ ] Polarity
 - [ ] Floating Body
   - Using above, see Anderson et. al.
+- [ ] Centroid Body
+  - See Anderson et al.
+- [ ] Volume Estimation
+  - See Vempala et al.
 
 # Contributing
 
