@@ -51,8 +51,11 @@ class HitAndRunWalk:
             rtn, _, _ = self._step(self.loc)
 
         self.steps += 1
+        self.loc = np.copy(rtn) # necessary?
+
         if self.record_steps:
             self.history = np.concatenate((self.history, [rtn]), axis=0)
+
         assert(self.history.shape == (self.steps, self.dim))
 
         return rtn
