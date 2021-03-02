@@ -12,7 +12,7 @@ This package contains some primitive subroutines to
 
 - [ ] Random Walks
   - [ ] Ball walk
-  - [ ] Hit-and-run
+  - [x] Hit-and-run
 - [ ] GLS Algorithms
   - [ ] Optimization oracle
   - [ ] Separation oracle
