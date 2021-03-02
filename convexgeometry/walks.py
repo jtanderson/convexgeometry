@@ -48,7 +48,7 @@ class HitAndRunWalk:
         """Performs one step from the current location"""
         rtn = self.loc
         for i in range(0,self.space):
-            rtn, _, _ = self._step(self.loc)
+            rtn, _, _ = self._step(rtn)
 
         self.steps += 1
         self.loc = np.copy(rtn) # necessary?
