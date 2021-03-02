@@ -22,7 +22,7 @@ def cubePoints(dim):
         for j in itertools.permutations(i,dim)])))
 
 N = 1000
-step_size = 10
+step_size = 1
 dim = 2
 
 # The points of the zonotope
@@ -40,7 +40,10 @@ for i in tqdm(range(0,N)):
     points[i,:] = p
 
 if dim is 2:
+    plt.title(f"Zonoid samples (step_size: {step_size})")
     plt.scatter(points[:,0], points[:,1])
-    plt.show()
+    plt.savefig(f"img/zonoid_{N}_{step_size}.png")
 else: 
     print("Too high dimension to plot")
+
+
