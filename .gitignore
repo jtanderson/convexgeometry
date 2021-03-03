@@ -1,2 +1,5 @@
 *.swp
 *.pyc
+convexgeometry.egg-info/*
+build
+dist

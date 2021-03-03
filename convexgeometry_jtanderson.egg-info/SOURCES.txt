@@ -1,9 +1,0 @@
-README.md
-pyproject.toml
-setup.cfg
-setup.py
-convexgeometry/__init__.py
-convexgeometry_jtanderson.egg-info/PKG-INFO
-convexgeometry_jtanderson.egg-info/SOURCES.txt
-convexgeometry_jtanderson.egg-info/dependency_links.txt
-convexgeometry_jtanderson.egg-info/top_level.txt
