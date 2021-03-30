@@ -186,3 +186,5 @@ class HitAndRunWalk(RandomWalk):
         
         return start + final_t*direction, start+t_plus*direction, start+t_minus*direction
 
+class BallWalk(RandomWalk):
+    pass
