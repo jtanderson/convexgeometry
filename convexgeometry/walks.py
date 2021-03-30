@@ -188,3 +188,6 @@ class HitAndRunWalk(RandomWalk):
 
 class BallWalk(RandomWalk):
     pass
+
+class GridWalk(RandomWalk):
+    pass
