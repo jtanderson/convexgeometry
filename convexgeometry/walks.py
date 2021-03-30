@@ -4,17 +4,7 @@ import numpy.linalg as la
 def angle2vec(theta):
     return np.array([np.cos(theta), np.sin(theta)])
 
-# 2d for now
-# Assumption: start is in the body
-# memberfunc needs to be a membership oracle that gets
-# called like memberfunc(query_point, *args, **kwargs)
-
-# TODO: this could and should probably be abstracted to a master base class
-# to be used for all random walks
-
-class HitAndRunWalk:
-    """ Walk through a shape, guided by a membership oracle """
-
+class RandomWalk:
     def __init__(self, memberfunc, start, space=1, *args, **kwargs):
         """
         Create the walk object, storing a reference to the membership oracle.
@@ -60,6 +50,18 @@ class HitAndRunWalk:
 
         return rtn
 
+    # need to override in derived classes
+    def _step(self, whence):
+        """
+        Perform one step of the algorithm, starting from the point "whence".
+
+        This must be overridden by specific walk implementations.
+        """
+        pass
+
+# 2d for now (is it?)
+class HitAndRunWalk(RandomWalk):
+    """ Walk through a shape, guided by a membership oracle """
     def _step(self, start):
         """
         Internal. Do one step of hit-and-run.
