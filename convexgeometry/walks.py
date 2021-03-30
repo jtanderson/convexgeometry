@@ -59,9 +59,13 @@ class RandomWalk:
         """
         pass
 
-# 2d for now (is it?)
 class HitAndRunWalk(RandomWalk):
-    """ Walk through a shape, guided by a membership oracle """
+    """ Walk through a shape, guided by a membership oracle.
+    On each iteration:
+    - choose a random direction from the current location
+    - choose a random point on the line along that direction
+      that is still within the body and move to that point
+    """
     def _step(self, start):
         """
         Internal. Do one step of hit-and-run.
