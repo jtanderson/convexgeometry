@@ -210,5 +210,24 @@ class BallWalk(RandomWalk):
         return y if self.query(y) else whence
 
 class GridWalk(RandomWalk):
-    pass
+    """Uses the Grid Walk to generate approximately random points
+    Hyper-paramters:
+        - delta: grid point distance
+
+    Algorithm:
+        - Choose a coordinate and move +- delta along that axis
+        - If the point is in the body, move there. Otherwise stay.
+    """
+    def __init__(self, memberfunc, start, delta, space=1, *args, **kwargs):
+        self.delta = delta
+        super().__init__(memberfunc, start, space, *args, **kwargs)
+
+    def _step(self, whence):
+        coord = np.random.choice(np.arange(0,self.dim))
+        sign = np.random.choice([-1, 1])
+
+        y = np.copy(whence)
+        y[coord] = y[coord] + sign*self.delta
+
+        return y if self.query(y) else whence
 
