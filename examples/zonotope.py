@@ -6,6 +6,10 @@ import itertools
 from tqdm import tqdm
 from scipy.optimize import lsq_linear
 from matplotlib import pyplot as plt
+
+import sys
+sys.path.append('..//')
+
 from convexgeometry import walks
 
 def zonoid_membership_def(x, A):
@@ -29,6 +33,7 @@ dim = 2
 Averts = [[0,1],[1,0],[1,1]]
 A = np.array(Averts).T
 
+# Do hit and run
 walker = walks.HitAndRunWalk(zonoid_membership_def, np.array([0,0]), space=step_size, A=A)
 
 points = np.zeros((N,dim))
@@ -40,9 +45,30 @@ for i in tqdm(range(0,N)):
     points[i,:] = p
 
 if dim is 2:
-    plt.title(f"Zonoid samples (step_size: {step_size})")
+    plt.figure(0)
+    plt.title(f"Hit-and-Run Zonoid samples (step_size: {step_size})")
     plt.scatter(points[:,0], points[:,1])
-    plt.savefig(f"img/zonoid_{N}_{step_size}.png")
+    plt.savefig(f"img/hitrun_zonoid_{N}_{step_size}.png")
+else: 
+    print("Too high dimension to plot")
+
+
+# Do the Ball Walk
+walker = walks.BallWalk(zonoid_membership_def, np.array([0,0]), space=step_size, A=A, delta=0.5)
+
+points = np.zeros((N,dim))
+p = np.zeros((1,dim)) # start stepping from the origin
+for i in tqdm(range(0,N)):
+    p = walker.step()
+    #if( i%100 == 0 ):
+    #    print(f"{i}..", end='')
+    points[i,:] = p
+
+if dim is 2:
+    plt.figure(1)
+    plt.title(f"Ball Walk Zonoid samples (step_size: {step_size})")
+    plt.scatter(points[:,0], points[:,1])
+    plt.savefig(f"img/ball_zonoid_{N}_{step_size}.png")
 else: 
     print("Too high dimension to plot")
 
