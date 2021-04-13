@@ -32,9 +32,30 @@ dim = 2
 # The points of the zonotope
 Averts = [[0,1],[1,0],[1,1]]
 A = np.array(Averts).T
+origin = np.array([0,0],dtype='float64')
+
+# Do the Grid Walk
+walker = walks.GridWalk(zonoid_membership_def, origin, space=step_size, A=A, delta=0.3)
+
+points = np.zeros((N,dim))
+p = np.zeros((1,dim)) # start stepping from the origin
+for i in tqdm(range(0,N)):
+    p = walker.step()
+    #if( i%100 == 0 ):
+    #    print(f"{i}..", end='')
+    points[i,:] = p
+
+if dim is 2:
+    plt.figure(1)
+    plt.title(f"Grid Walk Zonoid samples (step_size: {step_size})")
+    plt.scatter(points[:,0], points[:,1])
+    plt.savefig(f"img/grid_zonoid_{N}_{step_size}.png")
+else: 
+    print("Too high dimension to plot")
+
 
 # Do hit and run
-walker = walks.HitAndRunWalk(zonoid_membership_def, np.array([0,0]), space=step_size, A=A)
+walker = walks.HitAndRunWalk(zonoid_membership_def, origin, space=step_size, A=A)
 
 points = np.zeros((N,dim))
 p = np.zeros((1,dim)) # start stepping from the origin
@@ -54,7 +75,7 @@ else:
 
 
 # Do the Ball Walk
-walker = walks.BallWalk(zonoid_membership_def, np.array([0,0]), space=step_size, A=A, delta=0.5)
+walker = walks.BallWalk(zonoid_membership_def, origin, space=step_size, A=A, delta=0.5)
 
 points = np.zeros((N,dim))
 p = np.zeros((1,dim)) # start stepping from the origin
