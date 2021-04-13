@@ -38,7 +38,7 @@ class RandomWalk:
         """Performs one step from the current location"""
         rtn = self.loc
         for i in range(0,self.space):
-            rtn, _, _ = self._step(rtn)
+            rtn = self._step(rtn)
 
         self.steps += 1
         self.loc = np.copy(rtn) # necessary?
@@ -184,10 +184,31 @@ class HitAndRunWalk(RandomWalk):
         final_t = np.random.uniform(t_minus, t_plus)
         #print(f"Final t = {final_t}")
         
-        return start + final_t*direction, start+t_plus*direction, start+t_minus*direction
+        # remove extra returns for now for other compatibility
+        return start + final_t*direction #, start+t_plus*direction, start+t_minus*direction
 
 class BallWalk(RandomWalk):
-    pass
+    """Uses the Ball Walk to generate approximately random points
+    Hyper-paramters:
+        - delta: radius of ball on each step
+
+    Algorithm:
+        - Choose random point on ball of radius delta, centered at x.
+        - If the point is in the body, move there. Otherwise stay.
+    """
+    def __init__(self, memberfunc, start, delta, space=1, *args, **kwargs):
+        self.delta = delta
+        super().__init__(memberfunc, start, space, *args, **kwargs)
+
+    def _step(self, whence):
+        angle = np.random.randn(self.dim)
+        direction = angle / la.norm(angle)
+        direction *= self.delta
+
+        y = whence + direction
+
+        return y if self.query(y) else whence
 
 class GridWalk(RandomWalk):
     pass
+
