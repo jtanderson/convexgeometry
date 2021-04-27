@@ -1,5 +1,5 @@
 import numpy as np
-import numpy.linalg as l
+import numpy.linalg as la
 
 def CentralCutEllipsoid(eps, sepK, n, R):
     """
@@ -82,6 +82,41 @@ def WSep2Viol(c, gamma, epsilon, n, R, sepK):
         # gave an ellipsoid E of volume at most eps1 containing K
         # so we assert that c.x < gamma + eps
         return True
+
+def WMem2Viol(y, delta, n, R, r, a0):
+    """
+    Given a body (K; n, R, r, a0), where
+    n: dimensions
+    R: circumradius so S(0,r) contains K
+    r: radius so that of S(a0,r) in K
+    Either
+       i) asserts that y in S(K,delta)
+      ii) asserts that y not in S(K, -delta)
+    """
+    pass
+
+def StrongerMem(y, delta, memK, n, R, r, a):
+    """
+    Given vector y, error delta > 0,
+    and weak-membership oracle
+    for a body (K; n, R, r, a0), where
+    n: dimensions
+    R: circumradius so S(0,r) contains K
+    r: radius so that of S(a0,r) in K
+    Either
+       i) asserts that y in S(K,delta)
+      ii) asserts that y not in K
+    """
+    assert(delta>0)
+    if la.norm(y - a, ord=2) < 2*R:
+        return False
+
+    yprime = (1 - delta/(4*R))*y + (delta*a)/(4*R)
+    deltaprime = (r*delta)/(4*R)
+
+    test = memK(yprime, deltaprime, n, R)
+    assert(isinstance(test,bool))
+    return test
 
 def WVal():
     pass
