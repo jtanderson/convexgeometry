@@ -42,7 +42,7 @@ convex body (K; n, R) given by a weak separation oracle.
 
 Comes from proof of 4.2.2 in GLS book
 """
-def WViol(c, gamma, epsilon, n, R, sepK):
+def WSep2Viol(c, gamma, epsilon, n, R, sepK):
     """
     Solves the following problem: given a body (K; n, R), and a 
     separation oracle, a vector c, and gamma, epsilon > 0;
