@@ -11,7 +11,7 @@ This package contains some primitive subroutines to
 ## Features/Routines implemented
 
 - [ ] Random Walks
-  - [ ] Ball walk
+  - [x] Ball walk
   - [x] Hit-and-run
   - [ ] Billiard Walk
 - [ ] GLS Algorithms
